@@ -146,8 +146,8 @@ async def handle_game(first_client, second_client):
         second_client_data = await second_client[0].readexactly(2)
 
         if (first_client_data[1] != 0) or second_client_data[1] != 0:
-            logging.error('ERROR... '
-                          'User does not enter in 0 for the first time')
+            logging.error('User '
+                          'does not enter in 0 for the first time')
             kill(first_client, second_client)
             return
 
@@ -166,7 +166,7 @@ async def handle_game(first_client, second_client):
 
             # Check if first byte was 'play card'
             if first_client_data[0] != 2 or second_client_data[0] != 2:
-                logging.error('Error... User does not enter in 2.')
+                logging.error('A user did not enter in 2')
                 kill(first_client, second_client)
                 return
 
@@ -175,8 +175,8 @@ async def handle_game(first_client, second_client):
             if check_card(first_client_data[1], split_deck[0]) is False \
                     or \
                     check_card(second_client_data[1], split_deck[1]) is False:
-                logging.error('Error... '
-                              'A clients card does not match card dealt')
+                logging.error("A client's card does not "
+                              "match card dealt")
                 kill(first_client, second_client)
                 return
 
@@ -193,7 +193,7 @@ async def handle_game(first_client, second_client):
                         client2_used[card_no] = True
 
                     else:
-                        logging.error('Error: A client tried to use '
+                        logging.error('A client is trying to use '
                                       'the same card again ')
                         kill(first_client, second_client)
                         return
